@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="message.js"></script>
+  <script src="welcome.js"></script>
+</head>
+
+<body>
+  <a href="my.html">マイページ</a>
+  <a href="sh.html">友達検索</a>
+  <a href="friends.html">友達一覧</a><br>
+  <a href="login.html">ログイン</a><br>
+  <a href="addpeng.html">友達グループ</a><br>
+  <a href="peng.html">友達公開内容に一覧</a><br>
+  <p id="welcome"></p>
+  <form action="/logout" method="post" style="display: inline;">
+    <button type="submit">ログアウト</button>
+  </form>
+  <hr><br>
+
+  チャット画面<br>
+  履歴：<br>
+  <div id="history"></div>
+  <br>
+  発信：
+  <input type="text" name="message" id="content">
+  <input type="button" value="送信" id="send">
+  <style>
+    #history {
+      width: 600px;
+      height: 600px;
+      border: 1px solid black;
+      overflow: auto;
+    }
+
+    .message {
+      display: flex;
+      margin: 6px 0;
+    }
+
+    .message.mine {
+      justify-content: flex-end;
+    }
+
+    .message.other {
+      justify-content: flex-start;
+    }
+
+    .bubble {
+      max-width: 70%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: #ffffff;
+      word-break: break-word;
+    }
+
+    .message.mine .bubble {
+      background: #95ec69;
+    }
+
+    .message.other .bubble {
+      background: #d1d1d1;
+    }
+
+    .bubble span {
+      font-size: 10px;
+      color: #666;
+    }
+  </style>
+</body>
+
+</html>
