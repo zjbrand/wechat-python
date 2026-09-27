@@ -157,7 +157,8 @@ def create_app(test_config=None):  # 测试设置未被传递时的默认值。
             return "メールアドレスを入力してください。", 400
         with app.extensions["db_engine"].connect() as conn:
             found = conn.execute(
-                text("SELECT 1 FROM user1 WHERE email=:email"), {"email": email}
+                text("SELECT 1 FROM user1 WHERE email=:email"), {
+                    "email": email}
             ).first()
         if not found:
             return "メールアドレス又はユーザーが存在しません。", 404
@@ -178,7 +179,8 @@ def create_app(test_config=None):  # 测试设置未被传递时的默认值。
         engine = app.extensions["db_engine"]
         with engine.connect() as conn:  # 无事务管理
             user_exists = conn.execute(
-                text("SELECT 1 FROM user1 WHERE email=:email"), {"email": recipient}
+                text("SELECT 1 FROM user1 WHERE email=:email"), {
+                    "email": recipient}
             ).first()
             exists = conn.execute(
                 text("""SELECT 1 FROM friend1
@@ -236,7 +238,8 @@ def create_app(test_config=None):  # 测试设置未被传递时的默认值。
                     """INSERT INTO message1 (messagefrom, messageto, content, updateTime)
                     VALUES (:sender, :recipient, :content, CURRENT_TIMESTAMP)"""
                 ),
-                {"sender": current_email(), "recipient": recipient, "content": content},
+                {"sender": current_email(), "recipient": recipient,
+                 "content": content},
             )
         return "メッセージが送信されました。"
 
@@ -313,6 +316,8 @@ def create_app(test_config=None):  # 测试设置未被传递时的默认值。
         )
 
     @app.get("/session_welcome")
+    # 中文：获取会话状态视图函数
+    # 日本語：セッション状態を返すビュー関数
     def session_status():
         email = current_email()
         return jsonify(loggedIn=bool(email), email=email)
